@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = ';lindakdhndsjdvahwnvajvakmjcah8&@*uyw7qwhds89(Y@E('
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nchjjkejefxfca:07bfd6a67f7b4ceec28276f8ebcc27b45dd6a952c8ecb1ace19abaf593d164c4@ec2-34-235-31-124.compute-1.amazonaws.com:5432/db05v6eok6m3mn'
+app.config['SQLALCHEMY_DATABASE_URI'] = ' postgres://hotazquivcomet:5401424037c021b5feb5961a41bf948a9c4eec9067fdfc3676c7c49cf4ffcf22@ec2-54-225-234-165.compute-1.amazonaws.com:5432/de9ifqnmo1shg5'
 # app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///books.db'
 db = SQLAlchemy(app)
 
