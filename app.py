@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = ';lindakdhndsjdvahwnvajvakmjcah8&@*uyw7qwhds89(Y@E('
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://mzpyeytzntntdz:68fecf906544fc5a8e1a9aca73968846f2895160f594c4c921095e424932dceb@ec2-3-223-242-224.compute-1.amazonaws.com:5432/dfgi0h1i0rk32r'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://podgtdyjdpgvjw:fbf40318720411821b77429e3a0a50b03e9a0953d3791fe3d9b9c6b50e123a5f@ec2-50-19-255-190.compute-1.amazonaws.com:5432/d6gal38n7s81tk'
 # app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///books.db'
 db = SQLAlchemy(app)
 
@@ -33,9 +33,9 @@ class bookForm(FlaskForm):
 
 class books(db.Model):
     book_id =  db.Column(db.Integer, primary_key=True)
-    book_title = db.Column(db.String(200), nullable=False)
-    author = db.Column(db.String(200), nullable=False)
-    country = db.Column(db.String(200), nullable=False)
+    book_title = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(150), nullable=False)
+    country = db.Column(db.String(70), nullable=False)
     book_link =  db.Column(db.Text(), nullable=True)
     author_link =  db.Column(db.Text(), nullable=True)
     country_link =  db.Column(db.Text(), nullable=True)
