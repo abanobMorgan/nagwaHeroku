@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = ';lindakdhndsjdvahwnvajvakmjcah8&@*uyw7qwhds89(Y@E('
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://lggvxclotqwmtp:819d16eb6d6e0509a36640d18bb2e821723eaca3b3bd06fcec150f3d5a53da19@ec2-34-227-135-211.compute-1.amazonaws.com:5432/d82fpfua93840o'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://mnhnryuifqjhum:bad76bb21f403ea52c7bc3917af553e6aeda7a6c92abd0e89b93ed53b8f6d1d5@ec2-54-225-234-165.compute-1.amazonaws.com:5432/d4b3unk8rd6i8m'
 # app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///books.db'
 db = SQLAlchemy(app)
 
@@ -36,11 +36,19 @@ class books(db.Model):
     book_title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(150), nullable=False)
     country = db.Column(db.String(70), nullable=False)
-    book_link =  db.Column(db.Text(), nullable=True)
-    author_link =  db.Column(db.Text(), nullable=True)
-    country_link =  db.Column(db.Text(), nullable=True)
+    book_link =  db.Column(db.Text(), default=None, nullable=True)
+    author_link =  db.Column(db.Text(),default=None,  nullable=True)
+    country_link =  db.Column(db.Text(),default=None,  nullable=True)
     def __repr__(self) -> str:
         return '<name %r>' %self.book_id
+    def __str__(self) -> str:
+        return f"""
+        id: {self.book_id},
+        title: {self.book_title},
+        author: {self.author},
+        country: {self.country},
+        ____-------------_____------------____--
+        """
 
 
 def existed(book_title): 
@@ -103,35 +111,35 @@ def createData():
 def updateData(): 
     form = bookCreateForm()
     book = books()
-    message ={}    
-    book_title= form.data.get('book_title')
-    if existed(book_title):
-        print('---------------------existed')
-        if request.method ==  'POST' or request.method ==  'PUT':
-            print('---------------------valid')
-            book.query.filter_by(
-                    book_title=book_title
-                ).first()
-            print(book_title, book.author, book)
-            book.book_title   = book_title,
-            book.book_link    = form.data.get('book_link'),
-            book.author       = form.data.get('author'),
-            book.author_link  = form.data.get('author_link'),
-            book.country      = form.data.get('country'),
-            book.country_link = form.data.get('country_link')
+    message ={}        
+    
+    if request.method ==  'POST' or request.method ==  'PUT':
+        title= str(form.data.get('book_title'))
+        if existed(title):
             try:
-                db.session.commit()
+
+                db.session.query(books).filter(
+                books.book_title == title).update(dict(
+                book_title   = title,
+                book_link    = form.data.get('book_link'),
+                author       = form.data.get('author'),
+                author_link  = form.data.get('author_link'),
+                country      = form.data.get('country'),
+                country_link = form.data.get('country_link')
+            ))               
+                db.session.commit()                
                 message['message'] = f' {book.book_title} has been updated'
 
             except: 
-                message['message'] = f' an error occurred with {book.book_title} '
+                message['message'] = f' an error occurred with {title} '
             
             return  index(message=message)
         else: 
-            message['message'] = f' this book is not in the store {book.book_title} '
+            message['message'] = f' this book is not in the store {title} '
             return  index(message=message)
     
     return render_template('updateData.html', form=form)
+
     
 @app.route('/deleteData', methods=['GET','DELETE','POST'])
 def deleteData():
@@ -163,6 +171,6 @@ def page_not_fount(e):
 
 
 if __name__=="__main__":
-    app.run()
+    app.run(debug=True)
 
 
