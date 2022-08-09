@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = ';lindakdhndsjdvahwnvajvakmjcah8&@*uyw7qwhds89(Y@E('
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hotazquivcomet:5401424037c021b5feb5961a41bf948a9c4eec9067fdfc3676c7c49cf4ffcf22@ec2-54-225-234-165.compute-1.amazonaws.com:5432/de9ifqnmo1shg5'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://szckbgkakpaepr:bf99bb94bbbc924f72658a7bbd68561c5b695549321478ee8cc33c1b51b31ac3@ec2-50-19-255-190.compute-1.amazonaws.com:5432/df88nc6j9bmpij'
 # app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///books.db'
 db = SQLAlchemy(app)
 
@@ -164,3 +164,5 @@ def page_not_fount(e):
 
 if __name__=="__main__":
     app.run()
+
+
